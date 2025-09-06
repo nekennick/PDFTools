@@ -4,7 +4,7 @@ import createCache from '@emotion/cache';
 import { useServerInsertedHTML } from 'next/navigation';
 import { CacheProvider as EmotionCacheProvider } from '@emotion/react';
 
-export function NextAppDirEmotionCacheProvider({ options, children }: any) {
+export function NextAppDirEmotionCacheProvider({ options, children }: { options: Omit<import('@emotion/cache').Options, 'insertionPoint'>, children: React.ReactNode }) {
   const [{ cache, flush }] = React.useState(() => {
     const cache = createCache(options);
     cache.compat = true;
