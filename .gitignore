@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Project-specific ignores
+lich su tao app ghep cat file pdf.zip
+/lich su tao app ghep cat file pdf
