@@ -62,11 +62,11 @@ const modalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 2,
+  bgcolor: 'transparent',
+  p: 0,
   maxWidth: '90vw',
   maxHeight: '90vh',
+  outline: 'none',
 };
 
 // Component for a single sortable page thumbnail
@@ -112,7 +112,7 @@ const SortablePage = ({ page, onRotate, onDuplicate, onPreview, onDelete }: {
       </Box>
 
       <Typography variant="caption" display="block" textAlign="center" sx={{ mt: 0.5, fontWeight: 'medium' }}>
-        Trang {page.originalIndex + 1}
+        {page.originalIndex + 1}
       </Typography>
     </Paper>
   );
@@ -402,29 +402,29 @@ export default function PdfEditor() {
               <CircularProgress />
             </Box>
           ) : (
-            <>
+            <Box sx={{ position: 'relative', boxShadow: 24, borderRadius: '4px', overflow: 'hidden' }}>
               {previewingPageDataUrl && (
-                <img src={previewingPageDataUrl} alt={`Page Preview ${previewPageIndex !== null ? previewPageIndex + 1 : ''}`} style={{ maxWidth: '100%', maxHeight: 'calc(90vh - 48px)' }} />
+                <img src={previewingPageDataUrl} alt={`Page Preview ${previewPageIndex !== null ? previewPageIndex + 1 : ''}`} style={{ maxWidth: '100%', maxHeight: '90vh' }} />
               )}
-              <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 2 }}>
-                <IconButton onClick={handlePreviousPageInPreview} disabled={previewPageIndex === 0 || previewPageIndex === null}>
+              <Box sx={{ position: 'absolute', bottom: '50px', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 0.5, backgroundColor: 'rgba(0, 0, 0, 0.6)', p: 1, borderRadius: 4 }}>
+                <IconButton sx={{ color: 'white' }} onClick={handlePreviousPageInPreview} disabled={previewPageIndex === 0 || previewPageIndex === null}>
                   <ArrowBackIosNewIcon />
                 </IconButton>
-                <Typography variant="body1" sx={{ alignSelf: 'center' }}>
-                  Trang {previewPageIndex !== null ? previewPageIndex + 1 : '-'} / {pages.length}
+                <Typography variant="body1" sx={{ alignSelf: 'center', color: 'white', minWidth: '70px', textAlign: 'center' }}>
+                  {previewPageIndex !== null ? previewPageIndex + 1 : '-'} / {pages.length}
                 </Typography>
-                <IconButton onClick={handleNextPageInPreview} disabled={previewPageIndex === pages.length - 1 || previewPageIndex === null}>
+                <IconButton sx={{ color: 'white' }} onClick={handleNextPageInPreview} disabled={previewPageIndex === pages.length - 1 || previewPageIndex === null}>
                   <ArrowForwardIosIcon />
                 </IconButton>
-                <IconButton onClick={handleRotatePageInPreview}>
+                <IconButton sx={{ color: 'white' }} onClick={handleRotatePageInPreview}>
                   <Rotate90DegreesCwIcon />
                 </IconButton>
-                <IconButton onClick={handleDeletePageInPreview}>
+                <IconButton sx={{ color: 'white' }} onClick={handleDeletePageInPreview}>
                   <DeleteIcon />
                 </IconButton>
-                <Button onClick={handleClosePreview} sx={{ ml: 2 }}>Đóng</Button>
+                <Button onClick={handleClosePreview} sx={{ ml: 1, color: 'white', borderColor: 'white', '&:hover': {backgroundColor: 'rgba(255,255,255,0.1)', borderColor: 'white'} }} variant="outlined">Đóng</Button>
               </Box>
-            </>
+            </Box>
           )}
         </Box>
       </Modal>
