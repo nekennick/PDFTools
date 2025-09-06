@@ -320,7 +320,7 @@ export default function PdfEditor() {
 
       const newPdfBytes = await newPdfDoc.save();
       
-      const blob = new Blob([newPdfBytes], { type: "application/pdf" });
+      const blob = new Blob([newPdfBytes.buffer], { type: "application/pdf" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
       link.download = pdfName;
